@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VOX_WEBSITE - User Dashboard</title>
+</head>
+<body>
+<h1>User Dashboard</h1>
+<button onclick="getUserInfo()">Get User Info</button>
+<p id="user-info-data"></p>
+
+<script>
+
+  async function getUserInfo() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Please log in first');
+      return;
+    }
+
+    const response = await fetch('http://localhost:8080/api/v1/demo-controller', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (response.ok) {
+      const data = await response.text();
+      document.getElementById('user-info-data').innerText = data;
+    } else {
+      alert('Error fetching user info');
+    }
+  }
+</script>
+</body>
+</html>
