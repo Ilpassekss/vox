@@ -1,4 +1,4 @@
-package com.VOX_WEBSITE.vox.Config;
+package com.VOX_WEBSITE.vox.config;
 
 import com.VOX_WEBSITE.vox.Repositories.UserRepo;
 import lombok.RequiredArgsConstructor;

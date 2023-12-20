@@ -40,11 +40,11 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest registerRequest) {
 
-        try {
-            mailSender.sendMail(registerRequest);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            mailSender.sendMail(registerRequest);
+//        } catch (MessagingException e) {
+//            throw new RuntimeException(e);
+//        }
 
         return ResponseEntity.ok(authenticationService.userRegistration(registerRequest));
     }

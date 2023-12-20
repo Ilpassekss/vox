@@ -10,12 +10,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-public class DemoController {
+public class FileUploadController {
 
     private final AuthenticationService authenticationService;
 
@@ -32,6 +33,17 @@ public class DemoController {
 
         User user = userRepo.findByEmail(email).get();
         return ResponseEntity.ok(messageService.saveMessage(messageRequest, user));
+    }
+
+
+    @PreAuthorize("hasAnyAuthority('USER')")
+    @PostMapping("/saveFile")
+    public ResponseEntity<String> fileUpload(@RequestParam("file")MultipartFile file ){
+
+
+
+
+        return ResponseEntity.ok("File uploaded successful");
     }
 
 

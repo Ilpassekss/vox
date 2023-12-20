@@ -81,7 +81,7 @@ public class AuthenticationService {
 
             refreshTokenRepo.save(authRes);
 
-            return AuthResponse.builder().accessToken(jwtAccessToken).build();
+            return AuthResponse.builder().accessToken(jwtAccessToken).refreshToken(jwtRefreshToken).build();
         } else {
 
             var jwtAccessToken = jwtService.generateAccessToken(user);

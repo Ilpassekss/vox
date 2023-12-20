@@ -1,4 +1,4 @@
-package com.VOX_WEBSITE.vox.Config;
+package com.VOX_WEBSITE.vox.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

@@ -26,7 +26,7 @@ public class JwtService {
     private final String SECRET_2;
 
     public JwtService(@Value("${jwt.accessToken.secret}") String SECRET_1,
-                      @Value("${jwt.accessToken.secret}") String SECRET_2){
+                      @Value("${jwt.refreshToken.secret}") String SECRET_2){
         this.SECRET_1 = SECRET_1;
         this.SECRET_2 = SECRET_2;
     }
@@ -49,7 +49,9 @@ public class JwtService {
 
         return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 300000))//5 minutes access token live
+                //.setExpiration(new Date(System.currentTimeMillis() + 120000))//2 minutes access token live
+                //.setExpiration(new Date(System.currentTimeMillis() + 300000))//5 minutes access token live
+                .setExpiration(new Date(System.currentTimeMillis() + (24*60*60000)))//1 day access token live
                 .signWith(getSignKey(SECRET_1), SignatureAlgorithm.HS256)
                 .compact();
 
@@ -101,7 +103,8 @@ public class JwtService {
 
         return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 2505600000L))//29 days token life
+                .setExpiration(new Date(System.currentTimeMillis() + 300000))
+                //.setExpiration(new Date(System.currentTimeMillis() + 2505600000L))//29 days token life
                 .signWith(getSignKey(SECRET_2), SignatureAlgorithm.HS256)
                 .compact();
 
